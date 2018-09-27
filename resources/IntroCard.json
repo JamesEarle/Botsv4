@@ -1,0 +1,43 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "Image",
+        "url": "https://prnewswire2-a.akamaihd.net/p/1893751/sp/189375100/thumbnail/entry_id/0_xtodqhz7/def_height/500/def_width/500/version/100012/type/1",
+        "size": "stretch"
+      },
+      {
+        "type": "TextBlock",
+        "spacing": "medium",
+        "size": "default",
+        "weight": "bolder",
+        "text": "Welcome to Lowe's Customer Service!",
+        "wrap": true,
+        "maxLines": 0
+      },
+      {
+        "type": "TextBlock",
+        "size": "default",
+        "isSubtle": true,
+        "text": "Hi, I'm Milo! I'm your customer service bot and I'm here to help you today. You can ask me things like \"What's my order status?\" and \"Find the store closest to me.\"",
+        "wrap": true,
+        "maxLines": 0
+      }
+    ],
+    "actions": [
+      {
+        "type": "Action.Submit",
+        "title": "Order Status"
+      },
+      {
+        "type": "Action.Submit",
+        "title": "Store Info"
+      },
+      {
+        "type": "Action.Submit",
+        "title": "Warranty & Repairs"
+      }
+    ]
+  }
