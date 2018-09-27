@@ -10,7 +10,7 @@ const { LuisBot } = require('./luisbot');
 // Read botFilePath and botFileSecret from .env file.
 // Note: Ensure you have a .env file and include botFilePath and botFileSecret.
 const ENV_FILE = path.join(__dirname, '.env');
-const env = require('dotenv').config({ path: ENV_FILE });
+require('dotenv').config({ path: ENV_FILE });
 
 // .bot file path. Use LUIS Bot File for this one
 // Modify .env to point to luisbotfile.bot when using this index file
@@ -34,7 +34,7 @@ const DEV_ENVIRONMENT = 'development';
 const BOT_CONFIGURATION = (process.env.NODE_ENV || DEV_ENVIRONMENT);
 
 // Language Understanding (LUIS) service name as defined in the .bot file.
-const LUIS_CONFIGURATION = 'development';
+const LUIS_CONFIGURATION = 'luisservice';
 
 // Get endpoint and LUIS configurations by service name.
 const endpointConfig = botConfig.findServiceByNameOrId(BOT_CONFIGURATION);
@@ -65,7 +65,7 @@ adapter.onTurnError = async (turnContext, error) => {
     console.error(`\n [onTurnError]: ${ error }`);
     await turnContext.sendActivity(`Oops. Something went wrong!`);
 };
-
+// --- "Token cannot be null" error in the below block.
 // Create the LuisBot.
 let bot;
 try {
@@ -74,6 +74,7 @@ try {
     console.error(`[botInitializationError]: ${ err }`);
     process.exit();
 }
+// ---
 
 // Create HTTP server.
 let server = restify.createServer();

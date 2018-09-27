@@ -1,9 +1,10 @@
-const { ActivityTypes, TurnContext } = require('botbuilder'); // Need TurnContext? Others didn't
-
-const { LuisApplication, LuisPredictionOptions, LuisRecognizer } = require('botbuilder-ai');
+const { ActivityTypes } = require('botbuilder'); // Need TurnContext? Others didn't
+// TurnContext
+const { LuisRecognizer } = require('botbuilder-ai');
+// LuisApplication, LuisPredictionOptions
 
 const { CardFactory } = require('botbuilder');
-const IntroCard = require('./resources/IntroCard.json');
+const IntroCard = require('../resources/IntroCard.json');
 
 class LuisBot {
     constructor(application, luisPredictionOptions, includeApiResults) {

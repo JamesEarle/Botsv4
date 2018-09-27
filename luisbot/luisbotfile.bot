@@ -12,6 +12,15 @@
             "SubscriptionKey": "52ad515d17d140dbadaa090a8757d300",
             "Region": "westus",
             "Version": "0.1"
+        },
+        {
+            "type": "endpoint",
+            "name": "luisservice",
+            "endpoint": "http://localhost:3978/api/messages",
+            "appId": "0b8a4e31-56ae-47d7-b2c6-80bf84cd494f",
+            "subscriptionKey": "52ad515d17d140dbadaa090a8757d300",
+            "region": "westus",
+            "version": "0.1"
         }
     ],
     "padlock": "",
