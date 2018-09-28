@@ -3,7 +3,7 @@
 
 const path = require('path');
 const restify = require('restify');
-const { BotFrameworkAdapter } = require('botbuilder');
+const { BotFrameworkAdapter, MemoryStorage, UserState } = require('botbuilder');
 const { BotConfiguration } = require('botframework-config');
 const { LuisBot } = require('./luisbot');
 
@@ -61,20 +61,22 @@ const adapter = new BotFrameworkAdapter({
 });
 
 // Catch-all for errors.
-adapter.onTurnError = async (turnContext, error) => {
+adapter.onTurnError = async(turnContext, error) => {
     console.error(`\n [onTurnError]: ${ error }`);
     await turnContext.sendActivity(`Oops. Something went wrong!`);
 };
-// --- "Token cannot be null" error in the below block.
+
+const memoryStorage = new MemoryStorage();
+let userState = new UserState(memoryStorage);
+
 // Create the LuisBot.
 let bot;
 try {
-    bot = new LuisBot(luisApplication, luisPredictionOptions);
+    bot = new LuisBot(luisApplication, luisPredictionOptions, userState);
 } catch (err) {
     console.error(`[botInitializationError]: ${ err }`);
     process.exit();
 }
-// ---
 
 // Create HTTP server.
 let server = restify.createServer();
@@ -86,7 +88,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (turnContext) => {
+    adapter.processActivity(req, res, async(turnContext) => {
         await bot.onTurn(turnContext);
     });
 });
